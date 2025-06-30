@@ -1,0 +1,282 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>IEEE EMERGENCY TRANSMISSION</title>
+    <style>
+        /* ===== CINEMATIC APOCALYPSE THEME ===== */
+        body {
+            background: #000;
+            color: #e0e0e0;
+            font-family: 'Courier New', monospace;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            background-image: 
+                radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 20px 20px;
+            position: relative;
+        }
+
+        /* ===== FALLING "RAIN" EFFECT (DATA STREAM) ===== */
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(transparent 95%, rgba(0, 255, 0, 0.1) 95%);
+            background-size: 100% 10px;
+            animation: rain 60s linear infinite;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        @keyframes rain {
+            from { background-position: 0 0; }
+            to { background-position: 0 100vh; }
+        }
+
+        /* ===== PULSING EMERGENCY GLOW ===== */
+        @keyframes pulse {
+            0% { opacity: 0.3; }
+            50% { opacity: 1; }
+            100% { opacity: 0.3; }
+        }
+
+        /* ===== FADE ANIMATIONS ===== */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+            20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
+
+        /* ===== MAIN CONTAINER ===== */
+        .container {
+            text-align: center;
+            padding: 40px;
+            border: 1px solid rgba(0, 255, 0, 0.3);
+            border-radius: 5px;
+            background: rgba(0, 0, 0, 0.7);
+            box-shadow: 0 0 30px rgba(0, 255, 0, 0.2);
+            position: relative;
+            max-width: 600px;
+            animation: pulse 4s infinite;
+        }
+
+        /* ===== TITLE STYLE ===== */
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            color: #ff5555;
+            text-shadow: 0 0 10px #ff0000;
+            letter-spacing: 2px;
+            position: relative;
+        }
+
+        h1::after {
+            content: "";
+            display: block;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #ff5555, transparent);
+            margin-top: 10px;
+        }
+
+        /* ===== SUBTITLE ===== */
+        .subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            color: #0f0;
+            text-shadow: 0 0 5px #0f0;
+            animation: flicker 5s infinite alternate;
+        }
+
+        @keyframes flicker {
+            0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; }
+            20%, 22%, 24%, 55% { opacity: 0.3; }
+        }
+
+        /* ===== INPUT BOX ===== */
+        .input-box {
+            position: relative;
+            margin: 30px 0;
+        }
+
+        input {
+            background: transparent;
+            color: #0f0;
+            border: 1px solid #0f0;
+            border-radius: 0;
+            padding: 15px 20px;
+            font-family: monospace;
+            font-size: 1.2rem;
+            width: 250px;
+            text-align: center;
+            outline: none;
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
+            transition: all 0.3s;
+        }
+
+        input:focus {
+            box-shadow: 0 0 25px rgba(0, 255, 0, 0.6);
+            border-color: #0f0;
+        }
+
+        /* ===== BUTTON ===== */
+        button {
+            background: rgba(0, 0, 0, 0.5);
+            color: #0f0;
+            border: 1px solid #0f0;
+            padding: 15px 30px;
+            font-family: monospace;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background: rgba(0, 255, 0, 0.2);
+            box-shadow: 0 0 30px rgba(0, 255, 0, 0.4);
+        }
+
+        button::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                transparent,
+                rgba(0, 255, 0, 0.1),
+                transparent
+            );
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { left: -50%; }
+            100% { left: 150%; }
+        }
+
+        /* ===== ERROR MESSAGE ===== */
+        #error {
+            color: #ff5555;
+            text-shadow: 0 0 5px #ff0000;
+            height: 20px;
+            margin-top: 15px;
+            font-size: 0.9rem;
+        }
+
+        /* ===== CORNER BORDERS ===== */
+        .container::before, .container::after {
+            content: "";
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            border: 2px solid #0f0;
+            animation: pulse 4s infinite;
+        }
+
+        .container::before {
+            top: -2px;
+            left: -2px;
+            border-right: none;
+            border-bottom: none;
+        }
+
+        .container::after {
+            bottom: -2px;
+            right: -2px;
+            border-left: none;
+            border-top: none;
+        }
+
+        /* ===== TYPEWRITER EFFECT ===== */
+        .typewriter {
+            overflow: hidden;
+            border-right: 2px solid #0f0;
+            white-space: nowrap;
+            margin: 0 auto;
+            letter-spacing: 2px;
+            animation: 
+                typing 3.5s steps(40, end),
+                blink-caret 0.75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: #0f0 }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>IEEE EMERGENCY TRANSMISSION</h1>
+        <div class="subtitle">
+            <div class="typewriter">SYSTEM FAILURE IMMINENT. INPUT RECOVERY KEY.</div>
+        </div>
+        
+        <div class="input-box">
+            <input type="password" id="password" placeholder="ENTER KEY">
+        </div>
+        
+        <button onclick="checkPassword()">AUTHORIZE</button>
+        <p id="error"></p>
+    </div>
+
+    <script>
+        function checkPassword() {
+            const password = document.getElementById("password").value;
+            const errorElement = document.getElementById("error");
+            
+            if (password === "802.11") {
+                // Add dramatic transition before redirect
+                document.body.style.animation = "fadeOut 1s forwards";
+                setTimeout(() => {
+                    window.location.href = "https://i.imgur.com/XYZ123.jpg"; // Your circuit image
+                }, 1000);
+            } else {
+                errorElement.innerText = "ACCESS DENIED: INVALID CREDENTIALS";
+                // Shake effect for wrong password
+                document.querySelector(".container").style.animation = "shake 0.5s";
+                setTimeout(() => {
+                    document.querySelector(".container").style.animation = "pulse 4s infinite";
+                }, 500);
+            }
+        }
+        
+        // Add fade-in effect on load
+        window.addEventListener('load', () => {
+            document.body.style.opacity = "1";
+            document.body.style.animation = "fadeIn 2s forwards";
+        });
+    </script>
+</body>
+</html>
