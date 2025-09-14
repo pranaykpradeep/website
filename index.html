@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -244,33 +243,51 @@
         </div>
         
         <div class="input-box">
-            <input type="password" id="password" placeholder="ENTER KEY">
+                <div style="margin-bottom:10px;">
+                    <input type="text" id="groupname" placeholder="ENTER GROUP NAME" style="width:250px;">
+                </div>
+                <div>
+                    <input type="password" id="password" placeholder="ENTER KEY" style="width:250px;">
+                </div>
         </div>
         
         <button onclick="checkPassword()">AUTHORIZE</button>
         <p id="error"></p>
+
     </div>
 
     <script>
-        function checkPassword() {
-            const password = document.getElementById("password").value;
-            const errorElement = document.getElementById("error");
-            
-            if (password === "802.11") {
-                // Add dramatic transition before redirect
-                document.body.style.animation = "fadeOut 1s forwards";
-                setTimeout(() => {
-                    window.location.href = "https://www.ieeesbgeci.org/"; // Your circuit image
-                }, 1000);
-            } else {
-                errorElement.innerText = "ACCESS DENIED: INVALID CREDENTIALS";
-                // Shake effect for wrong password
-                document.querySelector(".container").style.animation = "shake 0.5s";
-                setTimeout(() => {
-                    document.querySelector(".container").style.animation = "pulse 4s infinite";
-                }, 500);
+            function checkPassword() {
+                const password = document.getElementById("password").value;
+                const groupname = document.getElementById("groupname").value;
+                const errorElement = document.getElementById("error");
+                if (!groupname) {
+                    errorElement.innerText = "Please enter your group name.";
+                    return;
+                }
+                if (password === "802.11") {
+                    // Submit group name to Google Form using fetch (background)
+                    const formUrl = "https://docs.google.com/forms/u/1/d/e/1FAIpQLSce1ehKuUYJah5qRdEpXviWrFBi38ghTsKL3zJynAkz58K8rQ/formResponse";
+                    const formData = new FormData();
+                    formData.append("entry.1848472306", groupname); // group name field
+                    fetch(formUrl, {
+                        method: "POST",
+                        mode: "no-cors",
+                        body: formData
+                    });
+                    // Add dramatic transition before redirect
+                    document.body.style.animation = "fadeOut 1s forwards";
+                    setTimeout(() => {
+                        window.location.href = "https://www.ieeesbgeci.org/";
+                    }, 1000);
+                } else {
+                    errorElement.innerText = "ACCESS DENIED: INVALID CREDENTIALS";
+                    document.querySelector(".container").style.animation = "shake 0.5s";
+                    setTimeout(() => {
+                        document.querySelector(".container").style.animation = "pulse 4s infinite";
+                    }, 500);
+                }
             }
-        }
         
         // Add fade-in effect on load
         window.addEventListener('load', () => {
